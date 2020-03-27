@@ -2,7 +2,6 @@ package com.example.quarantinemanagement;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.chaos.view.PinView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -41,14 +39,13 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        requestWindowFeature(1);
+        requestWindowFeature(1);//adjusting full screen
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
 
         setContentView(R.layout.activity_otp);
         mAuth = FirebaseAuth.getInstance();
-
         topText = findViewById(R.id.topText_otp);
         pinView = findViewById(R.id.pinView_otp);
         next = findViewById(R.id.button_otp);
@@ -127,7 +124,7 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
             //Getting the code sent by SMS
             String code = phoneAuthCredential.getSmsCode();                                          //code for auto detection .....
             Toast.makeText(getApplicationContext(), "SMS Reading Done", Toast.LENGTH_SHORT).show();
-            Log.d(TAG, "Code Received by app ");
+            Log.d(TAG, "Code Received by app code: "+code);
 
             //sometime the code is not detected automatically
             //in this case the code will be null
@@ -151,7 +148,7 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
         public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
             Log.d(TAG, "Entered Code sent");
             super.onCodeSent(s, forceResendingToken);
-            Toast.makeText(getApplicationContext(), "CODE SENT", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "CODE SENT s="+s, Toast.LENGTH_SHORT).show();
 
             //storing the verification id that is sent to the user
             mVerificationId = s;
