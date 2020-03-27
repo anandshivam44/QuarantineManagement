@@ -3,9 +3,11 @@ package com.example.quarantinemanagement;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -14,24 +16,36 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chaos.view.PinView;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.TaskExecutors;
+import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
+
+import java.util.concurrent.TimeUnit;
 
 public class otp extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG ="MyTag" ;
     private PinView pinView;
     private Button next;
-    private TextView topText,textU;
+    private TextView topText, textU;
     private EditText userName, userPhone;
     private ConstraintLayout first, second;
     private FirebaseAuth mAuth;
+    private String mVerificationId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        requestWindowFeature(1);
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-//                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-//        getWindow().setStatusBarColor(Color.TRANSPARENT);
+        requestWindowFeature(1);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
 
         setContentView(R.layout.activity_otp);
         mAuth = FirebaseAuth.getInstance();
@@ -56,16 +70,25 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
         if (next.getText().equals("Let's go!")) {//send otp
             String name = userName.getText().toString();
             String phone = userPhone.getText().toString();
+            Log.d(TAG, "Name "+name);
+            Log.d(TAG, "Phone "+phone);
 
             if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(phone)) {
                 next.setText("Verify");
                 first.setVisibility(View.GONE);
                 second.setVisibility(View.VISIBLE);
                 topText.setText("I Still don't trust you.nTell me something that only two of us know.");
+
+                //most important backend is next line
+                sendVerificationCode(phone);
+
+
             } else {
                 Toast.makeText(otp.this, "Please enter the details", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "NAme or phone number is empty");
             }
         } else if (next.getText().equals("Verify")) {//verify otp
+            Log.d(TAG, "Entered else if part ");
             String OTP = pinView.getText().toString();
             if (OTP.equals("3456")) {
                 pinView.setLineColor(Color.GREEN);
@@ -80,4 +103,112 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
         }
 
     }
+
+    //the method is sending verification code
+    //the country id is concatenated
+    //you can take the country id as user input as well
+    private void sendVerificationCode(String phone) {   // method for getting sms.........
+        Log.d(TAG, "Just entered send verification code");
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                "+91" + phone,
+                60,
+                TimeUnit.SECONDS,
+                TaskExecutors.MAIN_THREAD,
+                mCallbacks);
+        Log.d(TAG, "Completed send verification code");
+
+    }
+
+    //the callback to detect the verification status
+    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {         //this object is for tracking sms sent or not.
+        @Override
+        public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
+            Log.d(TAG, "Just entered onVerificationCompleted");//Log.d(TAG, "Just entered ");
+
+            //Getting the code sent by SMS
+            String code = phoneAuthCredential.getSmsCode();                                          //code for auto detection .....
+            Toast.makeText(getApplicationContext(), "SMS Reading Done", Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "Code Received by app ");
+
+            //sometime the code is not detected automatically
+            //in this case the code will be null
+            //so user has to manually enter the code
+            if (code != null) {
+                Log.d(TAG, "Code Received by app and code is not empty set text in pinVier");
+                pinView.setText(code);
+                //verifying the code
+                verifyVerificationCode(code);                                               //function call for verifying code using autodetected code
+            }
+            Log.d(TAG, "Completed onVerificationCompleted");
+        }
+
+        @Override
+        public void onVerificationFailed(FirebaseException e) {
+            Log.d(TAG, "Verification Failed "+e.getMessage());
+            Toast.makeText(otp.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+            Log.d(TAG, "Entered Code sent");
+            super.onCodeSent(s, forceResendingToken);
+            Toast.makeText(getApplicationContext(), "CODE SENT", Toast.LENGTH_SHORT).show();
+
+            //storing the verification id that is sent to the user
+            mVerificationId = s;
+            Log.d(TAG, "Exit Code sent");
+        }
+    };
+
+
+    private void verifyVerificationCode(String code) {  // method for verification called by submit otp button....
+        //creating the credential
+        Log.d(TAG, "entered verifyVerificationCode ");
+        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, code);
+
+        //signing the user
+        signInWithPhoneAuthCredential(credential);
+        Log.d(TAG, "Exit verifyVerificationCode ");
+    }
+
+    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
+        Log.d(TAG, "entered signInWithPhoneAuthCredential ");
+        // code for user signin......
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(otp.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "signIn Complete ");
+
+                            //verification successful we will start the profile activity
+                            Intent intent = new Intent(otp.this, DrawerActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+
+                        } else {
+                            Log.d(TAG, "sign in failed ");
+
+                            //verification unsuccessful.. display an error message
+
+                            String message = "Somthing is wrong, we will fix it soon...";
+
+                            if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                                message = "Invalid code entered...";
+                            }
+
+//                            Snackbar snackbar = Snackbar.make(findViewById(R.id.parent), message, Snackbar.LENGTH_SHORT);
+//                            snackbar.setAction("Dismiss", new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View v) {
+//
+//                                }
+//                            });
+//                            snackbar.show();
+                        }
+                    }
+                });
+        Log.d(TAG, "Exit signInWithPhoneAuthCredential ");
+    }
+
 }
