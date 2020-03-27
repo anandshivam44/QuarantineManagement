@@ -18,7 +18,7 @@ import androidx.core.content.ContextCompat;
 
 public class MainActivity extends AppCompatActivity {
     private  int PERMISSION_CODE=1;
-    Button btn1,btn2,btn3,btn4,btn5,btn6;
+    Button btn1,btn2,btn3,btn4,btn5,btn6,permission_to_otp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         btn4=(Button)findViewById(R.id.permission4);
         btn5=(Button)findViewById(R.id.permission5);
         btn6=(Button)findViewById(R.id.permission6);
+        permission_to_otp=(Button)findViewById(R.id.permission_to_otp);
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +83,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 btn6.setBackgroundColor(Color.parseColor("#27ae60"));
+            }
+        });
+
+        permission_to_otp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,otp.class));
             }
         });
     }
