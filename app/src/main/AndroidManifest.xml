@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DrawerActivity"></activity>
+        <activity android:name=".otp"></activity>
+        <activity
+            android:name=".ui.login.otp"
+            android:label="@string/title_activity_otp" />
+        <activity android:name=".DrawerActivity" />
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
