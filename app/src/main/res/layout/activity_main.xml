@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:text="permission"
         android:id="@+id/permission1"
-        android:background="#c0392b"
+        android:background="#66c0392b"
         android:layout_margin="5dp"
         android:textSize="20dp"
         android:padding="5dp"/>
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:text="permission"
         android:id="@+id/permission2"
-        android:background="#c0392b"
+        android:background="#66c0392b"
         android:layout_margin="5dp"
         android:textSize="20dp"
         android:padding="5dp"/>
@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:text="permission"
         android:id="@+id/permission3"
-        android:background="#c0392b"
+        android:background="#66c0392b"
         android:layout_margin="5dp"
         android:textSize="20dp"
         android:padding="5dp"/>
@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:text="permission"
         android:id="@+id/permission4"
-        android:background="#c0392b"
+        android:background="#66c0392b"
         android:layout_margin="5dp"
         android:textSize="20dp"
         android:padding="5dp"/>
@@ -51,7 +51,7 @@
         android:layout_width="wrap_content"
         android:text="permission"
         android:id="@+id/permission5"
-        android:background="#c0392b"
+        android:background="#66c0392b"
         android:layout_margin="5dp"
         android:textSize="20dp"
         android:padding="5dp"/>
@@ -60,10 +60,17 @@
         android:layout_width="wrap_content"
         android:text="permission"
         android:id="@+id/permission6"
-        android:background="#c0392b"
+        android:background="#66c0392b"
         android:layout_margin="5dp"
         android:textSize="20dp"
         android:padding="5dp"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:background="#ABCDEF"
+        android:padding="15dp"
+        />
 
 
 
