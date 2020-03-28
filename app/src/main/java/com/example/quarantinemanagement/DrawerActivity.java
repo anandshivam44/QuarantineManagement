@@ -3,6 +3,7 @@ package com.example.quarantinemanagement;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.KeyguardManager;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.AsyncTask;
@@ -14,6 +15,8 @@ import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
@@ -55,6 +58,7 @@ public class DrawerActivity extends AppCompatActivity {
     private TextView global_no_of_death;
     private TextView global_no_of_recovered;
     private TextView tv;
+    private Button dashboard;
     private static final String TAG ="MyTag" ;
 
     //number picker variables
@@ -83,6 +87,14 @@ public class DrawerActivity extends AppCompatActivity {
         Initialize();
         startTimer();
         verifyFingerPrint();
+        dashboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DrawerActivity.this,MenuListActivity.class));
+            }
+        });
+
+
 
 
 
@@ -157,6 +169,7 @@ public class DrawerActivity extends AppCompatActivity {
     }
 
     void Initialize(){
+        dashboard=(Button)findViewById(R.id.btn_dash);
         mToolbar=(Toolbar)findViewById(R.id.nav_action_bar);
         //setActionBar(mToolbar);
 
@@ -246,7 +259,7 @@ public class DrawerActivity extends AppCompatActivity {
                 instruction.setText("Add at least one fingerprint in your device to use this feature");
             }
             else{
-                instruction.setText("Place your Finger on FingerprintScanner to use this App");
+                instruction.setText("Place your Finger on FingerprintScanner");
 
                 generateKey();
 
