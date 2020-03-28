@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 btn4.setBackground(ContextCompat.getDrawable(MainActivity.this,R.drawable.btn_back3));
-                startActivity(new Intent(MainActivity.this,MapsActivity.class));
+                
 
             }
         });
