@@ -20,7 +20,7 @@ import androidx.core.content.ContextCompat;
 
 public class MainActivity extends AppCompatActivity {
     private  int PERMISSION_CODE=1;
-    Button btn1,btn2,btn3,btn4,btn5,btn6,permission_to_otp;
+     private Button btn1,btn2,btn3,btn4,btn5,btn6,permission_to_otp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
