@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -6,7 +8,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawerLayout"
+    android:background="@drawable/blue_gradient"
     tools:context=".DrawerActivity">
+    <ScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,11 +20,107 @@
         android:orientation="vertical"
         android:gravity="center"
         android:padding="0dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_height="160dp">
 
-        <include layout="@layout/menu_list"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LIVE"
+                android:textColor="#e74c3c"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.897"
+                app:layout_constraintLeft_toRightOf="parent"
+                app:layout_constraintRight_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/global"
+                app:layout_constraintVertical_bias="0.226" />
 
+            <TextView
+                android:id="@+id/global"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Fetching data ..."
+                android:textSize="14sp"
+                android:gravity="center"
+                ></TextView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Verify FingerPrint before"
+            android:gravity="center"
+            android:textColor="#16a085"
+            android:layout_marginTop="20dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+
+            <NumberPicker
+                android:id="@+id/numberpicker_main_picker_hr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                ></NumberPicker>
+            <NumberPicker
+                android:id="@+id/numberpicker_main_picker_min"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                ></NumberPicker>
+            <NumberPicker
+                android:id="@+id/numberpicker_main_picker_sec"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                ></NumberPicker>
+
+
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="275dp"
+            tools:context=".MainActivity"
+
+            >
+
+            <ImageView
+                android:id="@+id/fingerprintImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="45dp"
+                android:src="@drawable/ic_fingerprint_black_24dp"
+                android:layout_centerHorizontal="true"
+                ></ImageView>
+            <TextView
+                android:id="@+id/instruction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Place your finger on the scanner"
+                android:layout_below="@+id/fingerprintImage"
+                android:layout_centerHorizontal="true"
+                android:textSize="25sp"
+                android:textColor="#000000"
+                android:layout_marginTop="50dp"
+                ></TextView>
+
+        </RelativeLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_dash"
+            android:text="dashboard"
+            android:textSize="35sp" />
 
     </LinearLayout>
+    </ScrollView>
 
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
@@ -28,7 +130,4 @@
         android:layout_gravity="start">
 
     </com.google.android.material.navigation.NavigationView>
-
-
-
 </androidx.drawerlayout.widget.DrawerLayout>

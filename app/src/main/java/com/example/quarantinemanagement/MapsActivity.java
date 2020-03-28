@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -82,9 +83,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     mMap.addMarker(new MarkerOptions().position(latLng).title(latitude+","+longitude));
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 
-                    LatLng sydney = new LatLng(-3400, 1510);
-                    mMap.addMarker(new MarkerOptions().position(sydney).title("Marker check"));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+//                    LatLng sydney = new LatLng(-3400, 1510);
+//                    mMap.addMarker(new MarkerOptions().position(sydney).title("Marker check"));
+//                    mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
                 }catch (Exception e)
                 {
@@ -117,9 +118,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+//        LatLng sydney = new LatLng(-34, 151);
+//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
@@ -175,5 +176,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     {
         databaseReference.child("latitude").push().setValue(txt_Latitude.getText().toString());
         databaseReference.child("longitude").push().setValue(txt_Longitude.getText().toString());
+        Toast.makeText(this,"thanks for updating👍",Toast.LENGTH_SHORT).show();
     }
 }

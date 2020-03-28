@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/blue_gradient"
-    tools:context=".MainActivity"
+    tools:context=".MenuListActivity"
     >
 
     <LinearLayout
@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:text="#STAY_HOME😷"
                 android:fontFamily="sans-serif-condensed-light"
-                android:textColor="#FAFBFD"
+                android:textColor="#080E19"
                 android:layout_below="@+id/dashboard"
                 android:textSize="14dp" />
 
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:text="Dashboard"
                 android:layout_alignParentLeft="true"
-                android:textColor="#FAFBFD"
+                android:textColor="#0A101C"
                 android:textSize="25dp" />
 
             <ImageView
@@ -47,97 +47,6 @@
                 android:src="@drawable/stayathome" />
         </RelativeLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_gravity="center"
-            android:layout_height="160dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="LIVE"
-                android:textColor="#e74c3c"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.897"
-                app:layout_constraintLeft_toRightOf="parent"
-                app:layout_constraintRight_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/global"
-                app:layout_constraintVertical_bias="0.226" />
-
-            <TextView
-                android:id="@+id/global"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Fetching data ..."
-                android:textSize="14sp"
-                android:gravity="center"
-                ></TextView>
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Verify FingerPrint before"
-            android:gravity="center"
-            android:textColor="#16a085"
-            android:layout_marginTop="20dp"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:orientation="horizontal"
-            android:gravity="center"
-            >
-
-            <NumberPicker
-                android:id="@+id/numberpicker_main_picker_hr"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                ></NumberPicker>
-            <NumberPicker
-                android:id="@+id/numberpicker_main_picker_min"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                ></NumberPicker>
-            <NumberPicker
-                android:id="@+id/numberpicker_main_picker_sec"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                ></NumberPicker>
-
-
-        </LinearLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="275dp"
-            tools:context=".MainActivity"
-
-            >
-
-            <ImageView
-                android:id="@+id/fingerprintImage"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="45dp"
-                android:src="@drawable/ic_fingerprint_black_24dp"
-                android:layout_centerHorizontal="true"
-                ></ImageView>
-            <TextView
-                android:id="@+id/instruction"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Place your finger on the scanner"
-                android:layout_below="@+id/fingerprintImage"
-                android:layout_centerHorizontal="true"
-                android:textSize="25sp"
-                android:textColor="#000000"
-                android:layout_marginTop="50dp"
-                ></TextView>
-
-        </RelativeLayout>
 
 
 
@@ -315,7 +224,8 @@
                     <Button
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:background="@drawable/location"/>
+                        android:background="@drawable/location"
+                        android:id="@+id/update_location"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
