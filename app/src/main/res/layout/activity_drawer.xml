@@ -117,6 +117,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/btn_dash"
             android:text="dashboard"
+            android:textColor="#F3EFCF"
+            android:background="@drawable/btn_background"
+            android:padding="10dp"
             android:textSize="35sp" />
 
     </LinearLayout>
