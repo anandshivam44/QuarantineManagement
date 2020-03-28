@@ -25,6 +25,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -75,6 +79,17 @@ public class DrawerActivity extends AppCompatActivity {
     private Cipher cipher;
     private String KEY_NAME="AndroidKey";
 
+    DatabaseReference myRef;
+
+    private FirebaseAuth mAuth;
+    FirebaseDatabase database;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth = FirebaseAuth.getInstance();
+        Log.d(TAG, "UID "+mAuth.getUid()+" \nCurrent User "+mAuth.getCurrentUser()+" \nPhone Number "+mAuth.getCurrentUser().getPhoneNumber());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,6 +173,8 @@ public class DrawerActivity extends AppCompatActivity {
 
     void Initialize(){
         mToolbar=(Toolbar)findViewById(R.id.nav_action_bar);
+        myRef= database.getReference("Quarantine Management");
+
         //setActionBar(mToolbar);
 
         mDrawerLayout=(DrawerLayout)findViewById(R.id.drawerLayout);
