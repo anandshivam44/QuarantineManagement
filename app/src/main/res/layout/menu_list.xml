@@ -286,7 +286,8 @@
                     <Button
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:background="@drawable/news"/>
+                        android:background="@drawable/news"
+                        android:id="@+id/btn_guidelines"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -316,7 +317,8 @@
                     <Button
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:background="@drawable/who"/>
+                        android:background="@drawable/who"
+                        android:id="@+id/btn_who"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -346,7 +348,8 @@
                     <Button
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:background="@drawable/donate"/>
+                        android:background="@drawable/donate"
+                        android:id="@+id/btn_donate"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
