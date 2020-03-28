@@ -18,16 +18,23 @@
 
         <activity android:name=".otp"/>
 
-        <activity android:name=".DrawerActivity" />
-        <activity android:name=".RegistrationActivity" />
-        <activity android:name=".StartActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            >
+        <activity android:name=".DrawerActivity" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".RegistrationActivity" />
+        <activity android:name=".StartActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            >
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
     </application>
 

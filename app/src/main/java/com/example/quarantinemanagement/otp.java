@@ -41,6 +41,7 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
     private ConstraintLayout first, second;
     private FirebaseAuth mAuth;
     private String mVerificationId;
+    private Button skip;
 
     @Override
     protected void onStart() {
@@ -51,6 +52,8 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
             Log.d(TAG, "onStart: "+currentUser.getDisplayName()+"---"+
                     currentUser.getEmail()+"****"+currentUser.getProviderId()+
                     "___"+currentUser.getUid());
+            Intent intent = new Intent(otp.this, DrawerActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         }
 
     }
@@ -81,14 +84,26 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
         second = findViewById(R.id.secondStep_otp);
         textU = findViewById(R.id.textView_noti_otp);
         first.setVisibility(View.VISIBLE);
+        skip=findViewById(R.id.skip);
 
         next.setOnClickListener(this);
+
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "Skip button Clicked");
+                Intent intent = new Intent(otp.this, DrawerActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
 
 
     }
 
     @Override
     public void onClick(View v) {
+        Log.d(TAG, "lower button clicked");
         if (next.getText().equals("Let's go!")) {//send otp
             String name = userName.getText().toString();
             String phone = userPhone.getText().toString();

@@ -6,23 +6,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:padding="60dp"
+    android:padding="30dp"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <GridLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="horizontal">
         <Button
             android:id="@+id/permission1"
-            android:layout_width="250dp"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:background="@drawable/battery"
+            android:background="#66c0392b"
             android:padding="5dp"
             android:text="permission"
-            android:gravity="center"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:visibility="visible" />
 
         <Button
             android:id="@+id/permission2"
@@ -33,7 +33,7 @@
             android:padding="5dp"
             android:text="permission"
             android:textSize="20dp"
-            android:visibility="invisible" />
+            android:visibility="visible" />
 
         <Button
             android:id="@+id/permission3"
@@ -42,7 +42,7 @@
             android:layout_margin="5dp"
             android:background="#66c0392b"
             android:padding="5dp"
-            android:visibility="invisible"
+            android:visibility="visible"
             android:text="permission"
             android:textSize="20dp" />
 
@@ -54,7 +54,7 @@
             android:background="#66c0392b"
             android:padding="5dp"
             android:text="permission"
-            android:visibility="invisible"
+            android:visibility="visible"
             android:textSize="20dp" />
 
         <Button
@@ -65,7 +65,7 @@
             android:background="#66c0392b"
             android:padding="5dp"
             android:text="permission"
-            android:visibility="invisible"
+            android:visibility="visible"
             android:textSize="20dp" />
 
         <Button
@@ -76,7 +76,7 @@
             android:background="#ffc0392b"
             android:padding="5dp"
             android:text="permission"
-            android:visibility="invisible"
+            android:visibility="visible"
             android:textSize="20dp" />
 
         <Button
@@ -85,9 +85,9 @@
             android:layout_height="wrap_content"
             android:background="#ABCDEF"
             android:padding="15dp"
-            android:visibility="invisible"
+            android:visibility="visible"
             android:text="Next" />
-    </LinearLayout>
+    </GridLayout>
 
 
 </HorizontalScrollView>
