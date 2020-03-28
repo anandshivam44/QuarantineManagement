@@ -28,6 +28,18 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Skip Login"
+        android:textAllCaps="false"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/topText_otp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:background="#00ffffff"
+        android:textColor="@android:color/holo_blue_light"
+        ></Button>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/first_step_otp"
@@ -140,7 +152,7 @@
             android:inputType="number"
             android:padding="10dp"
             android:textSize="18sp"
-            app:itemCount="4"
+            app:itemCount="6"
             app:itemHeight="48dp"
             app:itemRadius="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -181,5 +193,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

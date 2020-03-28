@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<HorizontalScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD
     android:padding="10dp"
     android:background="@drawable/gradient_background"
     android:orientation="vertical"
     tools:context=".MainActivity"
     android:gravity="center">
+=======
+    android:gravity="center"
+    android:padding="30dp"
+    tools:context=".MainActivity">
+>>>>>>> dfae554947b3359cb5d5dc94c3d71949f6cab470
 
-    <Button
-        android:layout_height="wrap_content"
+    <GridLayout
         android:layout_width="wrap_content"
+<<<<<<< HEAD
         android:text="permission"
         android:id="@+id/permission1"
         android:background="@drawable/permission_button_background"
@@ -80,9 +86,85 @@
         android:background="@drawable/btn_background"
         android:padding="15dp"
         />
+=======
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/permission1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="#66c0392b"
+            android:padding="5dp"
+            android:text="permission"
+            android:textSize="20dp"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/permission2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="#66c0392b"
+            android:padding="5dp"
+            android:text="permission"
+            android:textSize="20dp"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/permission3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="#66c0392b"
+            android:padding="5dp"
+            android:visibility="visible"
+            android:text="permission"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/permission4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="#66c0392b"
+            android:padding="5dp"
+            android:text="permission"
+            android:visibility="visible"
+            android:textSize="20dp" />
+>>>>>>> dfae554947b3359cb5d5dc94c3d71949f6cab470
+
+        <Button
+            android:id="@+id/permission5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="#66c0392b"
+            android:padding="5dp"
+            android:text="permission"
+            android:visibility="visible"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/permission6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="#ffc0392b"
+            android:padding="5dp"
+            android:text="permission"
+            android:visibility="visible"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/permission_to_otp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ABCDEF"
+            android:padding="15dp"
+            android:visibility="visible"
+            android:text="Next" />
+    </GridLayout>
 
 
-
-
-
-</LinearLayout>
+</HorizontalScrollView>

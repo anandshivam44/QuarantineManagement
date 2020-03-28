@@ -44,11 +44,12 @@
         android:textSize="40sp"
         android:visibility="visible"/>
     <ImageView
+        android:padding="40dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/save"
         android:id="@+id/img2"
-        android:background="#094079"
+        android:background="@drawable/blue_gradient"
         />
 
 

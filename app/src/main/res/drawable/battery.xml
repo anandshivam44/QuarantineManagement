@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingTop="200dp"
+    android:paddingBottom="200dp">
+    <item>
+        <shape android:shape="rectangle">
+            <stroke android:width="3dp"
+                android:color="#fedcba" />
+            <solid android:color="#abcdef" />
+        </shape>
+    </item>
+    <item android:height="300dp"
+        >
+        <bitmap
+            android:src="@drawable/battery_icon"
+            android:gravity="fill"
+            />
+    </item>
+</layer-list>

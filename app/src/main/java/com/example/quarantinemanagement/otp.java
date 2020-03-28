@@ -1,5 +1,6 @@
 package com.example.quarantinemanagement;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.Intent;
@@ -21,8 +22,14 @@ import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+
+
 import java.util.concurrent.TimeUnit;
 
 public class otp extends AppCompatActivity implements View.OnClickListener {
@@ -34,6 +41,22 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
     private ConstraintLayout first, second;
     private FirebaseAuth mAuth;
     private String mVerificationId;
+    private Button skip;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();//check if the user is already logged in
+        Log.d(TAG, "current User = "+currentUser);
+        if(currentUser!=null){
+            Log.d(TAG, "onStart: "+currentUser.getDisplayName()+"---"+
+                    currentUser.getEmail()+"****"+currentUser.getProviderId()+
+                    "___"+currentUser.getUid());
+            Intent intent = new Intent(otp.this, DrawerActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +66,12 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
+
+        // Write a message to the database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("quarantine-management");
+
+        myRef.setValue("Hello, World!");
 
         setContentView(R.layout.activity_otp);
         mAuth = FirebaseAuth.getInstance();
@@ -55,14 +84,26 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
         second = findViewById(R.id.secondStep_otp);
         textU = findViewById(R.id.textView_noti_otp);
         first.setVisibility(View.VISIBLE);
+        skip=findViewById(R.id.skip);
 
         next.setOnClickListener(this);
+
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "Skip button Clicked");
+                Intent intent = new Intent(otp.this, DrawerActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
 
 
     }
 
     @Override
     public void onClick(View v) {
+        Log.d(TAG, "lower button clicked");
         if (next.getText().equals("Let's go!")) {//send otp
             String name = userName.getText().toString();
             String phone = userPhone.getText().toString();
@@ -86,16 +127,17 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
         } else if (next.getText().equals("Verify")) {//verify otp
             Log.d(TAG, "Entered else if part ");
             String OTP = pinView.getText().toString();
-            if (OTP.equals("3456")) {
-                pinView.setLineColor(Color.GREEN);
-                textU.setText("OTP Verified");
-                textU.setTextColor(Color.GREEN);
-                next.setText("Next");
-            } else {
-                pinView.setLineColor(Color.RED);
-                textU.setText("X Incorrect OTP");
-                textU.setTextColor(Color.RED);
-            }
+            verifyVerificationCode(OTP);
+//            if (OTP.equals("3456")) {
+//                pinView.setLineColor(Color.GREEN);
+//                textU.setText("OTP Verified");
+//                textU.setTextColor(Color.GREEN);
+//                next.setText("Next");
+//            } else {
+//                pinView.setLineColor(Color.RED);
+//                textU.setText("X Incorrect OTP");
+//                textU.setTextColor(Color.RED);
+//            }
         }
 
     }
@@ -109,7 +151,7 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
                 "+91" + phone,
                 60,
                 TimeUnit.SECONDS,
-                TaskExecutors.MAIN_THREAD,
+                this,
                 mCallbacks);
         Log.d(TAG, "Completed send verification code");
 
@@ -134,6 +176,10 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
                 pinView.setText(code);
                 //verifying the code
                 verifyVerificationCode(code);                                               //function call for verifying code using autodetected code
+            }
+            else{
+                signInWithPhoneAuthCredential(phoneAuthCredential);
+
             }
             Log.d(TAG, "Completed onVerificationCompleted");
         }
@@ -173,7 +219,7 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(otp.this, new OnCompleteListener<AuthResult>() {
                     @Override
-                    public void onComplete(Task<AuthResult> task) {
+                    public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "signIn Complete ");
 
