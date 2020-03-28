@@ -46,14 +46,11 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();//check if the user is already logged in
-        Log.d(TAG, "current User = "+currentUser);
-        if(currentUser!=null){
-            Log.d(TAG, "onStart: "+currentUser.getDisplayName()+"---"+
-                    currentUser.getEmail()+"****"+currentUser.getProviderId()+
-                    "___"+currentUser.getUid());
+        mAuth = FirebaseAuth.getInstance();
+        Log.d(TAG, "Inside OTP\n\n"+"UID " + mAuth.getUid() + " \nCurrent User " + mAuth.getCurrentUser() + " \nPhone Number " + mAuth.getCurrentUser().getPhoneNumber());
+        if(mAuth.getUid()!=null){
             Intent intent = new Intent(otp.this, DrawerActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         }
 
     }
@@ -78,7 +75,6 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
         topText = findViewById(R.id.topText_otp);
         pinView = findViewById(R.id.pinView_otp);
         next = findViewById(R.id.button_otp);
-        userName = findViewById(R.id.username_otp);
         userPhone = findViewById(R.id.userPhone_otp);
         first = findViewById(R.id.first_step_otp);
         second = findViewById(R.id.secondStep_otp);
@@ -105,12 +101,10 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         Log.d(TAG, "lower button clicked");
         if (next.getText().equals("Let's go!")) {//send otp
-            String name = userName.getText().toString();
             String phone = userPhone.getText().toString();
-            Log.d(TAG, "Name "+name);
             Log.d(TAG, "Phone "+phone);
 
-            if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(phone)) {
+            if (!TextUtils.isEmpty(phone)) {
                 next.setText("Verify");
                 first.setVisibility(View.GONE);
                 second.setVisibility(View.VISIBLE);

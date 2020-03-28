@@ -2,20 +2,19 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/nav_account"
+    <item
+        android:id="@+id/nav_account"
         android:title="Dashboard"
-
-
         />
-    <item android:id="@+id/nav_check_for_symptoms"
+    <item
+        android:id="@+id/nav_check_for_symptoms"
         android:title="Check for Symptoms"
-
         />
 
-    <item android:id="@+id/nav_telephone_directory"
-        android:title="Telephone Directory"
-        />
-    <item android:id="@+id/nav_know_infeted"
-        android:title="Know if you crossed an infected patient"
-        />
+    <item
+        android:id="@+id/nav_telephone_directory"
+        android:title="Telephone Directory" />
+    <item
+        android:id="@+id/nav_know_infeted"
+        android:title="Know if you crossed an infected patient" />
 </menu>

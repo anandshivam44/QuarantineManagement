@@ -9,65 +9,182 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp"
+    android:padding="20dp"
     android:gravity="center"
     tools:context=".RegistrationActivity">
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="name"
+        android:hint="   Full Name"
         android:textSize="25dp"
         android:layout_margin="5dp"
-        android:id="@+id/txt_name"/>
+        android:id="@+id/full_name"
+        android:paddingVertical="16dp"
+
+        android:background="@drawable/edittext_background"
+        />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="age"
-        android:textSize="25dp"
+        android:hint="   Age"
+        android:textSize="25sp"
         android:layout_margin="5dp"
+        android:paddingVertical="16dp"
+        android:background="@drawable/edittext_background"
+
         android:id="@+id/txt_age"/>
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:tooltipText="Gender"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gender"
+            android:paddingVertical="16dp"
+            android:paddingRight="40dp"
+            android:textColor="#000000"
+            />
+        <RadioButton android:id="@+id/radio_male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Male"
+            android:layout_marginHorizontal="20dp"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton android:id="@+id/radio_female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Female"
+            android:layout_marginHorizontal="20dp"
+            android:onClick="onRadioButtonClicked"/>
+
+    </RadioGroup>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="address"
+        android:hint="   Address Line 1"
         android:textSize="25dp"
         android:layout_margin="5dp"
-        android:id="@+id/txt_add"/>
+        android:paddingVertical="16dp"
+        android:background="@drawable/edittext_background"
+        android:id="@+id/txt_add_line_1"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="   Address Line 2"
+        android:textSize="25dp"
+        android:layout_margin="5dp"
+        android:paddingVertical="16dp"
+
+        android:background="@drawable/edittext_background"
+
+        android:id="@+id/txt_add_line_2"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="   District"
+        android:textSize="25dp"
+        android:layout_margin="5dp"
+        android:paddingVertical="16dp"
+
+        android:background="@drawable/edittext_background"
+
+        android:id="@+id/get_district"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="State"
+            android:paddingVertical="16dp"
+            android:textSize="14sp"
+            android:textColor="#000000"
+            android:paddingRight="40dp"
+            />
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner_choose_state"
+
+            />
+    </LinearLayout>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="phone no."
+        android:hint="   Blood Group"
         android:textSize="25dp"
+        android:paddingVertical="16dp"
+
         android:layout_margin="5dp"
-        android:id="@+id/txt_phone"/>
+        android:background="@drawable/edittext_background"
+
+        android:id="@+id/blood_group"/>
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="E-mail"
+        android:hint="   Emergency Contact Number"
         android:textSize="25dp"
+        android:paddingVertical="16dp"
+
+        android:background="@drawable/edittext_background"
+
         android:layout_margin="5dp"
-        android:id="@+id/txt_email"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="password"
-        android:textSize="25dp"
-        android:layout_margin="5dp"
-        android:id="@+id/txt_password"/>
+        android:id="@+id/emergency_contact_number"/>
+<!--    <EditText-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="   Password"-->
+<!--        android:paddingVertical="16dp"-->
+
+<!--        android:textSize="25dp"-->
+<!--        android:layout_margin="5dp"-->
+<!--        android:background="@drawable/edittext_background"-->
+
+<!--        android:id="@+id/txt_password"/>-->
 
     <androidx.appcompat.widget.AppCompatEditText
         android:layout_width="match_parent"
         android:layout_height="150dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/gps_vector"
+            ></ImageView>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:textSize="30dp"
+            android:text="Set Home Location"
+            android:textAllCaps="false"
+            android:background="@color/design_default_color_background"
+            android:layout_margin="5dp"
+            />
+    </LinearLayout>
 
     <Button
+        android:id="@+id/register_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="30dp"
         android:text="Register"
-        android:layout_margin="5dp"
+        android:textColor="#ffffff"
+        android:padding="25dp"
+        android:background="#2c3e50"
+
+        android:layout_margin="15dp"
         />
 
 
