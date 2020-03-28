@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
@@ -31,6 +32,13 @@ public class DrawerActivity extends AppCompatActivity {
     private TextView global_no_of_recovered;
     private TextView tv;
     private static final String TAG ="MyTag" ;
+    private NumberPicker picker_hr;
+    private String[] pickerVals_hr;
+    private NumberPicker picker_min;
+    private String[] pickerVals_min;
+    private NumberPicker picker_sec;
+    private String[] pickerVals_sec;
+    int hr,min,sec;
 
 
     @Override
@@ -38,6 +46,7 @@ public class DrawerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer);
         Initialize();
+        startTimer();
 
 
 
@@ -54,6 +63,8 @@ public class DrawerActivity extends AppCompatActivity {
             }
         }.start();
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -129,7 +140,59 @@ public class DrawerActivity extends AppCompatActivity {
         mToogle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         tv=findViewById(R.id.global);
+        picker_hr = findViewById(R.id.numberpicker_main_picker_hr);
+        picker_hr.setMaxValue(5);
+        picker_hr.setMinValue(0);
+        pickerVals_hr  = new String[] {"0", "1", "2", "3", "4","5","6"};
+
+        picker_min = findViewById(R.id.numberpicker_main_picker_min);
+        picker_min.setMaxValue(59);
+        picker_min.setMinValue(0);
+        pickerVals_min  = new String[] {
+                "0","1","2","3","4","5","6","7","8","9","10",
+                "11","12","13","14","15","16","17","18","19","20",
+                "21","22","23","24","25","26","27","28","29","30",
+                "31","32","33","34","35","36","37","38","39","40",
+                "41","42","43","44","45","46","47","48","49","50",
+                "51","52","53","54","55","56","57","58","59"};
+
+        picker_sec = findViewById(R.id.numberpicker_main_picker_sec);
+        picker_sec.setMaxValue(59);
+        picker_sec.setMinValue(0);
+        pickerVals_sec  = new String[] {
+                "0","1","2","3","4","5","6","7","8","9","10",
+                "11","12","13","14","15","16","17","18","19","20",
+                "21","22","23","24","25","26","27","28","29","30",
+                "31","32","33","34","35","36","37","38","39","40",
+                "41","42","43","44","45","46","47","48","49","50",
+                "51","52","53","54","55","56","57","58","59"};
+
+        picker_hr.setDisplayedValues(pickerVals_hr);
+        picker_min.setDisplayedValues(pickerVals_min);
+        picker_min.setDisplayedValues(pickerVals_sec);
 
 
+
+
+    }
+    private void startTimer() {
+        new CountDownTimer(7200000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+
+                long total_seconds=(millisUntilFinished / 1000);
+                hr=(int)((total_seconds/60)/60);
+                min=(int)((total_seconds/60)-(hr*60));
+                sec=(int)(total_seconds-((hr*60*60-min*60)));
+
+                picker_hr.setValue(hr);
+                picker_min.setValue(min);
+                picker_sec.setValue(sec);
+            }
+
+            public void onFinish() {
+               // mTextField.setText("done!");
+            }
+        }.start();
     }
 }
