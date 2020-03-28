@@ -140,7 +140,7 @@
             android:inputType="number"
             android:padding="10dp"
             android:textSize="18sp"
-            app:itemCount="4"
+            app:itemCount="6"
             app:itemHeight="48dp"
             app:itemRadius="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
