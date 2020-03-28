@@ -5,88 +5,105 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:padding="30dp"
-    tools:context=".MainActivity">
+    android:padding="10dp"
+    android:background="@drawable/gradient_background"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:gravity="center">
+
+
+
 
     <GridLayout
         android:layout_width="wrap_content"
+        android:text="permission"
+        android:id="@+id/permission"
+        android:background="@drawable/blue_gradient"
+        android:textColor="#FFFFFF"
+        android:layout_margin="5dp"
+        android:textSize="20dp"
+        android:padding="10dp"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/permission1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="#66c0392b"
-            android:padding="5dp"
-            android:text="permission"
-            android:textSize="20dp"
-            android:visibility="visible" />
-
-        <Button
-            android:id="@+id/permission2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="#66c0392b"
-            android:padding="5dp"
-            android:text="permission"
-            android:textSize="20dp"
-            android:visibility="visible" />
+        android:orientation="horizontal"
+        android:gravity="center"
+        tools:context=".MainActivity"
+        >
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="permission"
+        android:id="@+id/permission1"
+        android:background="@drawable/permission_button_background"
+        android:textColor="#FFFFFF"
+        android:layout_margin="5dp"
+        android:textSize="20dp"
+        android:padding="10dp"/>
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="permission"
+        android:id="@+id/permission2"
+        android:background="@drawable/permission_button_background"
+        android:textColor="#FFFFFF"
+        android:layout_margin="5dp"
+        android:textSize="20dp"
+        android:padding="10dp"/>
 
         <Button
             android:id="@+id/permission3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="2"
             android:layout_margin="5dp"
-            android:background="#66c0392b"
-            android:padding="5dp"
-            android:visibility="visible"
+            android:background="@drawable/permission_button_background"
+            android:padding="10dp"
             android:text="permission"
+            android:textColor="#FFFFFF"
             android:textSize="20dp" />
 
         <Button
-            android:id="@+id/permission4"
-            android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="permission"
+        android:id="@+id/permission4"
+        android:background="@drawable/permission_button_background"
+        android:textColor="#FFFFFF"
+        android:layout_margin="5dp"
+        android:textSize="20dp"
+        android:padding="10dp"/>
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="permission"
+        android:id="@+id/permission5"
+        android:background="@drawable/permission_button_background"
+        android:textColor="#FFFFFF"
+        android:layout_margin="5dp"
+        android:textSize="20dp"
+        android:padding="10dp"/>
+        <Button
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="#66c0392b"
-            android:padding="5dp"
-            android:text="permission"
-            android:visibility="visible"
-            android:textSize="20dp" />
-
-        <Button
-            android:id="@+id/permission5"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="#66c0392b"
-            android:padding="5dp"
             android:text="permission"
-            android:visibility="visible"
-            android:textSize="20dp" />
-
-        <Button
             android:id="@+id/permission6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:background="@drawable/permission_button_background"
+            android:textColor="#FFFFFF"
             android:layout_margin="5dp"
-            android:background="#ffc0392b"
-            android:padding="5dp"
-            android:text="permission"
-            android:visibility="visible"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:padding="10dp"/>
 
-        <Button
-            android:id="@+id/permission_to_otp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#ABCDEF"
-            android:padding="15dp"
-            android:visibility="visible"
-            android:text="Next" />
+    <Button
+        android:id="@+id/permission_to_otp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:background="@drawable/btn_background"
+        android:padding="15dp"
+        />
+
+
+
     </GridLayout>
 
 
