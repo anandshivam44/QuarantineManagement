@@ -1,6 +1,10 @@
 package com.example.quarantinemanagement;
 
+import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.KeyguardManager;
+import android.content.pm.PackageManager;
+import android.hardware.fingerprint.FingerprintManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,6 +14,7 @@ import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toolbar;
@@ -17,6 +22,7 @@ import android.widget.Toolbar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import org.jsoup.Jsoup;
@@ -50,6 +56,8 @@ public class DrawerActivity extends AppCompatActivity {
     private TextView global_no_of_recovered;
     private TextView tv;
     private static final String TAG ="MyTag" ;
+
+    //number picker variables
     private NumberPicker picker_hr;
     private String[] pickerVals_hr;
     private NumberPicker picker_min;
@@ -58,6 +66,15 @@ public class DrawerActivity extends AppCompatActivity {
     private String[] pickerVals_sec;
     int hr,min,sec;
 
+    //fingerprint variables
+    private ImageView fingerprintImage;
+    private TextView instruction;
+    private FingerprintManager fingerprintManager;
+    private KeyguardManager keyguardManager;
+    private KeyStore keyStore;
+    private Cipher cipher;
+    private String KEY_NAME="AndroidKey";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +82,7 @@ public class DrawerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_drawer);
         Initialize();
         startTimer();
+        verifyFingerPrint();
 
 
 
@@ -95,16 +113,7 @@ public class DrawerActivity extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
-
-
-
-
+    //for Live Update
     private class Content extends AsyncTask<Void,Void,Void> {
         String array_global[];
         String array_IN[];
@@ -156,6 +165,10 @@ public class DrawerActivity extends AppCompatActivity {
 
         mDrawerLayout.addDrawerListener(mToogle);
         mToogle.syncState();
+
+        fingerprintImage=findViewById(R.id.fingerprintImage);
+        instruction=findViewById(R.id.instruction);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         tv=findViewById(R.id.global);
         picker_hr = findViewById(R.id.numberpicker_main_picker_hr);
@@ -217,6 +230,33 @@ public class DrawerActivity extends AppCompatActivity {
 
     //verify fingerprint
     private void verifyFingerPrint(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            fingerprintManager= (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
+            keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+            if (!fingerprintManager.isHardwareDetected()){
+                instruction.setText("Fingerprint Scanner Not Detected");
+            }
+            else if (ContextCompat.checkSelfPermission(this, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED){
+                instruction.setText("Permission not Granted");
+            }
+            else if(!keyguardManager.isKeyguardSecure()){
+                instruction.setText("Add lock to your phone in settings");
+            }
+            else if(!fingerprintManager.hasEnrolledFingerprints()){
+                instruction.setText("Add at least one fingerprint in your device to use this feature");
+            }
+            else{
+                instruction.setText("Place your Finger on FingerprintScanner to use this App");
+
+                generateKey();
+
+                if (cipherInit()){
+                    FingerprintManager.CryptoObject cryptoObject= new FingerprintManager.CryptoObject(cipher);
+                    FingerprintHandler fingerprintHandler=new FingerprintHandler(this);
+                    fingerprintHandler.startAuth(fingerprintManager,cryptoObject);
+                }
+            }
+        }
 
     }
 

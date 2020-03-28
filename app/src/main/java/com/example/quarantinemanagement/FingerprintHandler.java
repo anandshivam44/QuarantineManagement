@@ -50,7 +50,7 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
         }
         else{
             ins.setTextColor(ContextCompat.getColor(context,R.color.colorPrimary));
-            img.setImageResource(R.mipmap.ic_launcher_round);
+            img.setImageResource(R.drawable.tick_mark);
         }
     }
 
