@@ -6,11 +6,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -18,7 +20,7 @@ import androidx.core.content.ContextCompat;
 
 public class MainActivity extends AppCompatActivity {
     private  int PERMISSION_CODE=1;
-    Button btn1,btn2,btn3,btn4,btn5,btn6,permission_to_otp;
+     private Button btn1,btn2,btn3,btn4,btn5,btn6,permission_to_otp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,9 @@ public class MainActivity extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btn1.setBackgroundColor(Color.parseColor("#27ae60"));
+                //btn1.setBackgroundColor(Color.parseColor("#27ae60"));
+                btn1.setBackground(ContextCompat.getDrawable(MainActivity.this,R.drawable.btn_back3));
+
 
                     if(ContextCompat.checkSelfPermission(MainActivity.this,
                             Manifest.permission.INTERNET)== PackageManager.PERMISSION_GRANTED)
@@ -55,34 +59,34 @@ public class MainActivity extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btn2.setBackgroundColor(Color.parseColor("#27ae60"));
+                btn2.setBackground(ContextCompat.getDrawable(MainActivity.this,R.drawable.btn_back3));
                 startActivity(new Intent(MainActivity.this,DrawerActivity.class));
             }
         });
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btn3.setBackgroundColor(Color.parseColor("#27ae60"));
+                btn3.setBackground(ContextCompat.getDrawable(MainActivity.this,R.drawable.btn_back3));
                 startActivity(new Intent(MainActivity.this,RegistrationActivity.class));
             }
         });
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btn4.setBackgroundColor(Color.parseColor("#27ae60"));
+                btn4.setBackground(ContextCompat.getDrawable(MainActivity.this,R.drawable.btn_back3));
             }
         });
         btn5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btn5.setBackgroundColor(Color.parseColor("#27ae60"));
+                btn5.setBackground(ContextCompat.getDrawable(MainActivity.this,R.drawable.btn_back3));
             }
         });
 
         btn6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btn6.setBackgroundColor(Color.parseColor("#27ae60"));
+                btn6.setBackground(ContextCompat.getDrawable(MainActivity.this,R.drawable.btn_back3));
             }
         });
 
