@@ -141,8 +141,8 @@ public class DrawerActivity extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             String A="Global\n";
-            A+=" Total Case    "+ array_global[0]+"\n Death       "+ array_global[1]+"\n Recovered      "+ array_global[2];
-            A+="\n\nIndia\nTotal Case    "+ array_IN[0]+"\n Death       "+ array_IN[1]+"\n Recovered      "+ array_IN[2];
+            A+=" Total Case    "+ array_global[0]+"\n Death..........    "+ array_global[1]+"\n Recovered      "+ array_global[2];
+            A+="\n\nIndia\nTotal Case    "+ array_IN[0]+"\n Death.......      "+ array_IN[1]+"\n Recovered      "+ array_IN[2];
             tv.setText(A);
             //progressDialog.dismiss();
         }
