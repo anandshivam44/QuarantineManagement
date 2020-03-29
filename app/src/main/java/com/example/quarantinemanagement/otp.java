@@ -47,9 +47,9 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
     protected void onStart() {
         super.onStart();
         mAuth = FirebaseAuth.getInstance();
-        Log.d(TAG, "Inside OTP\n\n"+"UID " + mAuth.getUid() + " \nCurrent User " + mAuth.getCurrentUser() + " \nPhone Number " + mAuth.getCurrentUser().getPhoneNumber());
         if(mAuth.getUid()!=null){
             Intent intent = new Intent(otp.this, DrawerActivity.class);
+            Log.d(TAG, "Inside OTP\n\n"+"UID " + mAuth.getUid() + " \nCurrent User " + mAuth.getCurrentUser() + " \nPhone Number " + mAuth.getCurrentUser().getPhoneNumber());
             startActivity(intent);
         }
 
