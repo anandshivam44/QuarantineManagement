@@ -54,6 +54,7 @@ public class Telephone extends AppCompatActivity implements Exampleadapter.onNot
     @Override
     public void onNoteListenre(int position) {
         int a = 8;
+        int c = 8;
         int b = 788878878;
         exampleList.get(position);
         Example_item listitemok = exampleList.get(position);
