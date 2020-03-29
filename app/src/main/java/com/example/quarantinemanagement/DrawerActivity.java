@@ -30,6 +30,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+<<<<<<< HEAD
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -37,6 +38,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+=======
+import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+>>>>>>> 61ab58f7f376dee1231467cfa0017a72f14b911a
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -62,14 +69,20 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToogle;
     private Toolbar mToolbar;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 61ab58f7f376dee1231467cfa0017a72f14b911a
     private NavigationView navigationView;
     String url_global="https://www.worldometers.info/coronavirus/";
     String url_IN="https://www.worldometers.info/coronavirus/country/india/";
 
+<<<<<<< HEAD
     String url_global = "https://www.worldometers.info/coronavirus/";
     String url_IN = "https://www.worldometers.info/coronavirus/country/india/";
 
+=======
+>>>>>>> 61ab58f7f376dee1231467cfa0017a72f14b911a
     private TextView global_no_of_cases;
     private TextView global_no_of_death;
     private TextView global_no_of_recovered;
@@ -168,11 +181,18 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
             case R.id.nav_know_infeted:
                 Toast.makeText(getApplicationContext(),"clicked",Toast.LENGTH_SHORT).show();
                 break;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 61ab58f7f376dee1231467cfa0017a72f14b911a
         }
         return true;
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 61ab58f7f376dee1231467cfa0017a72f14b911a
 
     //for Live Update
     private class Content extends AsyncTask<Void, Void, Void> {
@@ -218,11 +238,14 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
     }
 
 
+<<<<<<< HEAD
     void Initialize(){
         navigationView=(NavigationView)findViewById(R.id.navigationView);
         dashboard=(Button)findViewById(R.id.btn_dash);
         mToolbar=(Toolbar)findViewById(R.id.nav_action_bar);
 
+=======
+>>>>>>> 61ab58f7f376dee1231467cfa0017a72f14b911a
     void Initialize() {
         dashboard = (Button) findViewById(R.id.btn_dash);
         mToolbar = (Toolbar) findViewById(R.id.nav_action_bar);
