@@ -45,52 +45,24 @@
         android:id="@+id/first_step_otp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="150dp"
         android:orientation="vertical"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/button_otp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/textView_otp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:textColor="#000000"
-            android:layout_marginTop="8dp"
-            android:text="Full name"
-            app:layout_constraintStart_toStartOf="@+id/username_otp"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/username_otp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="25dp"
-            android:background="@drawable/edittext_background"
-            android:hint="Whats your name?"
-            android:inputType="textPersonName"
-            android:padding="15dp"
-            android:textColor="#000000"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_otp" />
-
-        <TextView
             android:id="@+id/textView2_otp"
-            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="15dp"
             android:text="Phone number"
-            app:layout_constraintStart_toStartOf="@+id/userPhone_otp"
-            app:layout_constraintTop_toBottomOf="@+id/username_otp" />
+            android:textColor="#000000"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/userPhone_otp"
