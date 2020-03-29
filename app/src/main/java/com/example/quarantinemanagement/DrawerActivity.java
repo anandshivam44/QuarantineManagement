@@ -30,10 +30,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+
+import com.google.android.material.navigation.NavigationView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -59,9 +68,11 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToogle;
     private Toolbar mToolbar;
+
     private NavigationView navigationView;
     String url_global="https://www.worldometers.info/coronavirus/";
     String url_IN="https://www.worldometers.info/coronavirus/country/india/";
+
 
     private TextView global_no_of_cases;
     private TextView global_no_of_death;
@@ -94,13 +105,13 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
     FirebaseDatabase database;
     DatabaseReference mRef;
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mAuth = FirebaseAuth.getInstance();
-        Log.d(TAG, "Inside Drawer\n\nUID " + mAuth.getUid() + " \nCurrent User " + mAuth.getCurrentUser() + " \nPhone Number " + mAuth.getCurrentUser().getPhoneNumber());
-
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        mAuth = FirebaseAuth.getInstance();
+//        Log.d(TAG, "Inside Drawer\n\nUID " + mAuth.getUid() + " \nCurrent User " + mAuth.getCurrentUser() + " \nPhone Number " + mAuth.getCurrentUser().getPhoneNumber());
+//
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,7 +177,6 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         return true;
     }
 
-
     //for Live Update
     private class Content extends AsyncTask<Void, Void, Void> {
         String array_global[];
@@ -211,7 +221,9 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
     }
 
 
-    void Initialize() {
+
+    void Initialize(){
+        navigationView=(NavigationView)findViewById(R.id.navigationView);
         dashboard = (Button) findViewById(R.id.btn_dash);
         mToolbar = (Toolbar) findViewById(R.id.nav_action_bar);
         database = FirebaseDatabase.getInstance();
