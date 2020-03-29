@@ -88,7 +88,7 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "Skip button Clicked");
-                Intent intent = new Intent(otp.this, DrawerActivity.class);
+                Intent intent = new Intent(otp.this, RegistrationActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }

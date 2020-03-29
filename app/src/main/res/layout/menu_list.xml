@@ -387,6 +387,7 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
+                    android:id="@+id/register_again"
                     android:background="@drawable/ic_launcher_background"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -394,7 +395,7 @@
                     android:layout_marginTop="6dp"
                     android:textSize="18sp"
                     android:textColor="#012"
-                    android:text="button"/>
+                    android:text="register"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
