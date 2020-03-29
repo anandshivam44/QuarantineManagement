@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MapsActivity"
+    android:background="@drawable/blue_gradient"
     >
 
     <fragment
@@ -49,7 +50,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="140dp"
         android:layout_marginTop="600dp"
+        android:textSize="20dp"
+        android:padding="10dp"
+        android:background="@drawable/btn_back3"
+        android:textColor="#FFFFFF"
         android:onClick="updateButtonOnClick"
-        android:text="@string/update" />
+        android:text="@string/update"
+        />
 
 </FrameLayout>
