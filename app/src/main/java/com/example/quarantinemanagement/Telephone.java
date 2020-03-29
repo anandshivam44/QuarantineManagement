@@ -6,10 +6,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class Telephone extends AppCompatActivity {
+public class Telephone extends AppCompatActivity implements Exampleadapter.onNoteListener {
+
+    ArrayList<Example_item> exampleList;
 
     private RecyclerView mRecyclerview;
     private RecyclerView.Adapter madapter;
@@ -20,6 +23,7 @@ public class Telephone extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_telephone);
 
+        exampleList = new ArrayList<>();
         ArrayList<Example_item> exampleList = new ArrayList<>();
         exampleList.add(new Example_item(R.drawable.ic_call_black_phone,"Jharkhand","104"));
         exampleList.add(new Example_item(R.drawable.ic_call_black_phone,"Andhra Pradesh","0866-2410978"));
@@ -36,16 +40,26 @@ public class Telephone extends AppCompatActivity {
         exampleList.add(new Example_item(R.drawable.ic_call_black_phone,"Madhya Pradesh","0755-2527177"));
         exampleList.add(new Example_item(R.drawable.ic_call_black_phone,"Maharashtra","020-26127394"));
         exampleList.add(new Example_item(R.drawable.ic_call_black_phone,"Manipur","3852411668"));
-        mRecyclerview = (RecyclerView)findViewById(R.id.recyl);
+        mRecyclerview = findViewById(R.id.recyl);
         mRecyclerview.setHasFixedSize(true);
 
         mlayoutmanager = new LinearLayoutManager(this);
-        madapter = new Exampleadapter(exampleList);
+        madapter = new Exampleadapter(exampleList,this);
         mRecyclerview.setLayoutManager(mlayoutmanager);
         mRecyclerview.setAdapter(madapter);
     }
     public void helo(View v){
 
 
+    }
+
+    @Override
+    public void onNoteListenre(int position) {
+        int a = 8;
+        int b = 788878878;
+        exampleList.get(position);
+        Example_item listitemok = exampleList.get(position);
+        String phoneno =listitemok.getmText2();                 // phone no for dialing
+        Toast.makeText(getApplicationContext(),phoneno,Toast.LENGTH_LONG).show(); // start dialer activity'''''''''
     }
 }
