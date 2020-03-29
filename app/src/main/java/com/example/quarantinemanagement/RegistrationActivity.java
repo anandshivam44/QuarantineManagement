@@ -86,7 +86,7 @@ public class RegistrationActivity extends AppCompatActivity implements
         spin.setAdapter(aa);
 
 
-
+// comment added
 
 
         REGISTER.setOnClickListener(new View.OnClickListener() {
