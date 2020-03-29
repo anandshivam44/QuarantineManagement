@@ -53,9 +53,12 @@ public class Telephone extends AppCompatActivity implements Exampleadapter.onNot
 
     @Override
     public void onNoteListenre(int position) {
+        int a = 8;
+        int b = 788878878;
         exampleList.get(position);
         Example_item listitemok = exampleList.get(position);
         String phoneno =listitemok.getmText2();                 // phone no for dialing
-        Toast.makeText(getApplicationContext(),phoneno,Toast.LENGTH_LONG).show(); // start dialer activity
+        Toast.makeText(getApplicationContext(),phoneno,Toast.LENGTH_LONG).show(); // start dialer activity'''''''''
     }
+    /////////////////////////////////helo
 }
