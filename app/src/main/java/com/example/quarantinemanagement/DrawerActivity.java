@@ -137,16 +137,16 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         {
 
             case R.id.nav_dash:
-                Toast.makeText(this,"clicked",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"clicked",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_check_for_symptoms:
-                Toast.makeText(this,"clicked",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"clicked",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_telephone_directory:
-                Toast.makeText(this,"clicked",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"clicked",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_know_infeted:
-                Toast.makeText(this,"clicked",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"clicked",Toast.LENGTH_SHORT).show();
                 break;
 
         }
