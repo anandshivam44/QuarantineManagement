@@ -2,17 +2,25 @@ package com.example.quarantinemanagement;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.KeyguardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.provider.Settings;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
+import android.telephony.SmsManager;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -48,6 +56,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.KeyStore;
@@ -70,8 +79,8 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
     private Toolbar mToolbar;
 
     private NavigationView navigationView;
-    String url_global="https://www.worldometers.info/coronavirus/";
-    String url_IN="https://www.worldometers.info/coronavirus/country/india/";
+    String url_global = "https://www.worldometers.info/coronavirus/";
+    String url_IN = "https://www.worldometers.info/coronavirus/country/india/";
 
 
     private TextView global_no_of_cases;
@@ -125,7 +134,12 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         dashboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DrawerActivity.this, MenuListActivity.class));
+                Uri u = Uri.parse("tel:+918709885367");
+
+                // Create the intent and set the data for the
+                // intent as the phone number.
+                Intent i = new Intent(Intent.ACTION_DIAL, u);
+                startActivity(i);
             }
         });
 
@@ -133,8 +147,20 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         new CountDownTimer(Integer.MAX_VALUE, 10000) {
 
             public void onTick(long millisUntilFinished) {
-                Content content = new Content();
-                content.execute();
+                if (isOnline()){//check if user is online
+                    Log.d(TAG, "onTick: TRUE");
+                    Content content = new Content();
+                    content.execute();
+                }
+                else{
+                    String messageToSend = "Data Turned off from Shivam";
+                    String number = "+917979010458";
+
+                    SmsManager.getDefault().sendTextMessage(number, null, messageToSend, null,null);
+                    Log.d(TAG, "onTick: False");
+                }
+                //Content content = new Content();
+                //content.execute();
             }
 
             public void onFinish() {
@@ -152,25 +178,25 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         }
         return super.onOptionsItemSelected(item);
     }
-// method for item selected in the navigation drawer.
+
+    // method for item selected in the navigation drawer.
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-        int id= item.getItemId();
-        switch(id)
-        {
+        int id = item.getItemId();
+        switch (id) {
 
             case R.id.nav_dash:
-                Toast.makeText(getApplicationContext(),"clicked",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "clicked", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_check_for_symptoms:
-                Toast.makeText(getApplicationContext(),"clicked",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "clicked", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_telephone_directory:
-                Toast.makeText(getApplicationContext(),"clicked",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "clicked", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_know_infeted:
-                Toast.makeText(getApplicationContext(),"clicked",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "clicked", Toast.LENGTH_SHORT).show();
                 break;
 
         }
@@ -192,9 +218,9 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            String A="Global\n";
-            A+=" Total Case    "+ array_global[0]+"\n Death..........    "+ array_global[1]+"\n Recovered      "+ array_global[2];
-            A+="\n\nIndia\nTotal Case    "+ array_IN[0]+"\n Death.......      "+ array_IN[1]+"\n Recovered      "+ array_IN[2];
+            String A = "Global\n";
+            A += " Total Case    " + array_global[0] + "\n Death..........    " + array_global[1] + "\n Recovered      " + array_global[2];
+            A += "\n\nIndia\nTotal Case    " + array_IN[0] + "\n Death.......      " + array_IN[1] + "\n Recovered      " + array_IN[2];
             tv.setText(A);
             //progressDialog.dismiss();
         }
@@ -221,9 +247,8 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
     }
 
 
-
-    void Initialize(){
-        navigationView=(NavigationView)findViewById(R.id.navigationView);
+    void Initialize() {
+        navigationView = (NavigationView) findViewById(R.id.navigationView);
         dashboard = (Button) findViewById(R.id.btn_dash);
         mToolbar = (Toolbar) findViewById(R.id.nav_action_bar);
         database = FirebaseDatabase.getInstance();
@@ -384,5 +409,11 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
             throw new RuntimeException("Failed to init Cipher", e);
         }
 
+    }
+    public boolean isOnline() {
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        return (networkInfo != null && networkInfo.isConnected());
     }
 }
