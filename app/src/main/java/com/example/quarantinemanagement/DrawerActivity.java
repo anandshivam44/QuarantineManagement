@@ -198,7 +198,8 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                 break;
 
             case R.id.nav_check_for_symptoms:
-                Toast.makeText(getApplicationContext(), "clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Symptoms", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(DrawerActivity.this,Symptom.class));
                 break;
 
             case R.id.nav_telephone_directory:
@@ -206,9 +207,6 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                 startActivity(new Intent(DrawerActivity.this,Telephone.class));
                 break;
 
-            case R.id.nav_know_infeted:
-                Toast.makeText(getApplicationContext(), "clicked", Toast.LENGTH_SHORT).show();
-                break;
 
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
