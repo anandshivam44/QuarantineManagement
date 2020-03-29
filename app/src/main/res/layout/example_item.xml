@@ -8,7 +8,6 @@
     app:cardUseCompatPadding="true"
     app:cardPreventCornerOverlap="false"
     android:layout_margin="0dp"
-    android:onClick="helo"
 
 
     >
@@ -17,8 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="0dp"
-
-        android:background="@android:drawable/alert_light_frame">
+        android:background="@drawable/edittext_background"
+        >
 
         <ImageView
             android:id="@+id/imageview"

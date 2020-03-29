@@ -21,6 +21,7 @@ public class Telephone extends AppCompatActivity {
         setContentView(R.layout.activity_telephone);
 
         ArrayList<Example_item> exampleList = new ArrayList<>();
+        exampleList.add(new Example_item(R.drawable.ic_call_black_phone,"Jharkhand","104"));
         exampleList.add(new Example_item(R.drawable.ic_call_black_phone,"Andhra Pradesh","0866-2410978"));
         exampleList.add(new Example_item(R.drawable.ic_call_black_phone,"Arunanchal Pradesh","9436055743"));
         exampleList.add(new Example_item(R.drawable.ic_call_black_phone,"Assam","6913347770"));
@@ -29,7 +30,6 @@ public class Telephone extends AppCompatActivity {
         exampleList.add(new Example_item(R.drawable.ic_call_black_phone,"Goa","104"));
         exampleList.add(new Example_item(R.drawable.ic_call_black_phone,"Gujrat","104"));
         exampleList.add(new Example_item(R.drawable.ic_call_black_phone,"Harayana","8558893911"));
-        exampleList.add(new Example_item(R.drawable.ic_call_black_phone,"Jharkhand","104"));
         exampleList.add(new Example_item(R.drawable.ic_call_black_phone,"Himanchal Pradesh","104"));
         exampleList.add(new Example_item(R.drawable.ic_call_black_phone,"Karnataka","104"));
         exampleList.add(new Example_item(R.drawable.ic_call_black_phone,"Kerala","0471-2552056"));
@@ -45,6 +45,7 @@ public class Telephone extends AppCompatActivity {
         mRecyclerview.setAdapter(madapter);
     }
     public void helo(View v){
+
 
     }
 }
