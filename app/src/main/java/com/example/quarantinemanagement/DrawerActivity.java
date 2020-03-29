@@ -19,7 +19,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
@@ -28,6 +30,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -51,13 +54,15 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
-public class DrawerActivity extends AppCompatActivity {
+public class DrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToogle;
     private Toolbar mToolbar;
-    String url_global = "https://www.worldometers.info/coronavirus/";
-    String url_IN = "https://www.worldometers.info/coronavirus/country/india/";
+    private NavigationView navigationView;
+    String url_global="https://www.worldometers.info/coronavirus/";
+    String url_IN="https://www.worldometers.info/coronavirus/country/india/";
+
     private TextView global_no_of_cases;
     private TextView global_no_of_death;
     private TextView global_no_of_recovered;
@@ -104,6 +109,8 @@ public class DrawerActivity extends AppCompatActivity {
         Initialize();
         startTimer();
         verifyFingerPrint();
+
+        navigationView.setNavigationItemSelectedListener(this);
         dashboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,6 +140,30 @@ public class DrawerActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+// method for item selected in the navigation drawer.
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        int id= item.getItemId();
+        switch(id)
+        {
+
+            case R.id.nav_dash:
+                Toast.makeText(getApplicationContext(),"clicked",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_check_for_symptoms:
+                Toast.makeText(getApplicationContext(),"clicked",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_telephone_directory:
+                Toast.makeText(getApplicationContext(),"clicked",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_know_infeted:
+                Toast.makeText(getApplicationContext(),"clicked",Toast.LENGTH_SHORT).show();
+                break;
+
+        }
+        return true;
     }
 
 
@@ -178,6 +209,7 @@ public class DrawerActivity extends AppCompatActivity {
             return null;
         }
     }
+
 
     void Initialize() {
         dashboard = (Button) findViewById(R.id.btn_dash);
