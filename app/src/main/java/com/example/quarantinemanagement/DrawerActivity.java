@@ -129,6 +129,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         Initialize();
         startTimer();
         verifyFingerPrint();
+        handleAlarmManager();
 
         navigationView.setNavigationItemSelectedListener(this);
         dashboard.setOnClickListener(new View.OnClickListener() {
@@ -168,6 +169,10 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                 content.execute();
             }
         }.start();
+    }
+
+    private void handleAlarmManager() {
+
     }
 
 
