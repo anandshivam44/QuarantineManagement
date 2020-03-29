@@ -21,13 +21,25 @@ public class Precaution extends TutorialActivity {
                 //btn4.setBackground(ContextCompat.getDrawable(MainActivity.this,R.drawable.btn_back3));
                .setBackgroundColor(Color.parseColor("#FF3F51B5")) // int background color
                 .setDrawable(R.drawable.symptoms) // int top drawable
-                .setSummary("stay safe")
+                .setSummary("#stayHome #staySafe")
                 .build());
-        addFragment(new Step.Builder().setTitle("This is header")
-                .setContent("This is content")
-                .setBackgroundColor(Color.parseColor("#FF0957")) // int background color
-                .setDrawable(R.drawable.who) // int top drawable
-                .setSummary("This is summary")
+        addFragment(new Step.Builder().setTitle("wear mask")
+                .setContent("avoid handshake only🙏")
+                .setBackgroundColor(Color.parseColor("#FF3F51B5")) // int background color
+                .setDrawable(R.drawable.mask) // int top drawable
+                .setSummary("#stayHome #staySafe")
+                .build());
+        addFragment(new Step.Builder().setTitle("Self Quarantine")
+                .setContent("Don't go outside unnecessary")
+                .setBackgroundColor(Color.parseColor("#FF3F51B5")) // int background color
+                .setDrawable(R.drawable.corona) // int top drawable
+                .setSummary("#stayHome #staySafe")
+                .build());
+        addFragment(new Step.Builder().setTitle("Consult Doctors")
+                .setContent("Don't beleive on fake news always consult it with doctors")
+                .setBackgroundColor(Color.parseColor("#FF3F51B5")) // int background color
+                .setDrawable(R.drawable.doctorsgroup) // int top drawable
+                .setSummary("#stayHome #staySafe")
                 .build());
     }
 

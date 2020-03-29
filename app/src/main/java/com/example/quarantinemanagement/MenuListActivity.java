@@ -10,7 +10,7 @@ import android.widget.Button;
 
 public class MenuListActivity extends AppCompatActivity {
 
-    private Button update_location,who_data,DonateBtn,Guidlines,precaution;
+    private Button update_location,who_data,DonateBtn,Guidlines,precaution,register;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +20,7 @@ public class MenuListActivity extends AppCompatActivity {
         DonateBtn=(Button)findViewById(R.id.btn_donate);
         Guidlines=(Button)findViewById(R.id.btn_guidelines);
         precaution=(Button)findViewById(R.id.precaution_btn);
+        register=(Button)findViewById(R.id.register_again);
 
 
         update_location.setOnClickListener(new View.OnClickListener() {
@@ -51,6 +52,13 @@ public class MenuListActivity extends AppCompatActivity {
            @Override
            public void onClick(View v) {
                startActivity(new Intent(MenuListActivity.this,Precaution.class));
+           }
+       });
+
+       register.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               startActivity(new Intent(MenuListActivity.this,RegistrationActivity.class));
            }
        });
 

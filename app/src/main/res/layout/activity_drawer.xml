@@ -115,18 +115,29 @@
                 android:layout_marginTop="50dp"
                 ></TextView>
 
-        </RelativeLayout>
+        </RelativeLayout> <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_dash"
+        android:text="  Dashboasrd  "
+        android:layout_margin="15dp"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:background="@drawable/btn_back3"
+        android:padding="10dp"
+        android:textSize="35sp" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_dash"
+            android:id="@+id/btn_emergency"
             android:text="  Emergency!  "
             android:textAllCaps="false"
             android:textColor="#ffffff"
             android:background="@drawable/btn_background"
             android:padding="10dp"
             android:textSize="35sp" />
+
 
     </LinearLayout>
     </ScrollView>

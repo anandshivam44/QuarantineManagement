@@ -88,7 +88,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
     private TextView global_no_of_death;
     private TextView global_no_of_recovered;
     private TextView tv;
-    private Button dashboard;
+    private Button dashboard,emergency;
     private static final String TAG = "MyTag";
 
     //number picker variables
@@ -134,6 +134,12 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
         navigationView.setNavigationItemSelectedListener(this);
         dashboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DrawerActivity.this,MenuListActivity.class));
+            }
+        });
+        emergency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Uri u = Uri.parse("tel:+918709885367");
@@ -259,7 +265,8 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
     void Initialize() {
         navigationView = (NavigationView) findViewById(R.id.navigationView);
-        dashboard = (Button) findViewById(R.id.btn_dash);
+        emergency = (Button) findViewById(R.id.btn_emergency);
+        dashboard=(Button)findViewById(R.id.btn_dash);
         mToolbar = (Toolbar) findViewById(R.id.nav_action_bar);
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("message");
