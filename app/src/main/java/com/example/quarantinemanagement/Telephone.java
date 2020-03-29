@@ -45,6 +45,7 @@ public class Telephone extends AppCompatActivity implements Exampleadapter.onNot
         madapter = new Exampleadapter(exampleList,this);
         mRecyclerview.setLayoutManager(mlayoutmanager);
         mRecyclerview.setAdapter(madapter);
+        int x = 89;
     }
     public void helo(View v){
 
