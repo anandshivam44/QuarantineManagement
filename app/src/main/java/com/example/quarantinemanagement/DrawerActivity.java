@@ -36,6 +36,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 
@@ -179,27 +180,35 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         return super.onOptionsItemSelected(item);
     }
 
-    // method for item selected in the navigation drawer.
+    /**
+     * IMPLEMENTATION OF MENU ITEM CLICK*/
+// method for item selected in the navigation drawer.
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-        int id = item.getItemId();
-        switch (id) {
-
+        int id= item.getItemId();
+        switch(id)
+        {
             case R.id.nav_dash:
-                Toast.makeText(getApplicationContext(), "clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Dashboard",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(DrawerActivity.this,MenuListActivity.class));
                 break;
+
             case R.id.nav_check_for_symptoms:
                 Toast.makeText(getApplicationContext(), "clicked", Toast.LENGTH_SHORT).show();
                 break;
+
             case R.id.nav_telephone_directory:
-                Toast.makeText(getApplicationContext(), "clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"telephone directory",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(DrawerActivity.this,Telephone.class));
                 break;
+
             case R.id.nav_know_infeted:
                 Toast.makeText(getApplicationContext(), "clicked", Toast.LENGTH_SHORT).show();
                 break;
 
         }
+        mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
