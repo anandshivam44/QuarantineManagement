@@ -31,6 +31,9 @@ import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -59,12 +62,13 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
     private NavigationView navigationView;
     String url_global="https://www.worldometers.info/coronavirus/";
     String url_IN="https://www.worldometers.info/coronavirus/country/india/";
+
     private TextView global_no_of_cases;
     private TextView global_no_of_death;
     private TextView global_no_of_recovered;
     private TextView tv;
     private Button dashboard;
-    private static final String TAG ="MyTag" ;
+    private static final String TAG = "MyTag";
 
     //number picker variables
     private NumberPicker picker_hr;
@@ -73,7 +77,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
     private String[] pickerVals_min;
     private NumberPicker picker_sec;
     private String[] pickerVals_sec;
-    int hr,min,sec;
+    int hr, min, sec;
 
     //fingerprint variables
     private ImageView fingerprintImage;
@@ -82,8 +86,21 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
     private KeyguardManager keyguardManager;
     private KeyStore keyStore;
     private Cipher cipher;
-    private String KEY_NAME="AndroidKey";
+    private String KEY_NAME = "AndroidKey";
 
+    DatabaseReference myRef;
+
+    private FirebaseAuth mAuth;
+    FirebaseDatabase database;
+    DatabaseReference mRef;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth = FirebaseAuth.getInstance();
+        Log.d(TAG, "Inside Drawer\n\nUID " + mAuth.getUid() + " \nCurrent User " + mAuth.getCurrentUser() + " \nPhone Number " + mAuth.getCurrentUser().getPhoneNumber());
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,33 +114,29 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         dashboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DrawerActivity.this,MenuListActivity.class));
+                startActivity(new Intent(DrawerActivity.this, MenuListActivity.class));
             }
         });
-
-
-
 
 
         new CountDownTimer(Integer.MAX_VALUE, 10000) {
 
             public void onTick(long millisUntilFinished) {
-                Content content=new Content();
+                Content content = new Content();
                 content.execute();
             }
 
             public void onFinish() {
-                Content content=new Content();
+                Content content = new Content();
                 content.execute();
             }
         }.start();
     }
 
 
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(mToogle.onOptionsItemSelected(item)){
+        if (mToogle.onOptionsItemSelected(item)) {
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -155,7 +168,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
 
 
     //for Live Update
-    private class Content extends AsyncTask<Void,Void,Void> {
+    private class Content extends AsyncTask<Void, Void, Void> {
         String array_global[];
         String array_IN[];
 
@@ -186,10 +199,10 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
             try {
                 Document doc_global = Jsoup.connect(url_global).get();
                 Document doc_IN = Jsoup.connect(url_IN).get();
-                array_global =doc_global.getElementsByClass("maincounter-number").text().split(" ");
-                array_IN=doc_IN.getElementsByClass("maincounter-number").text().split(" ");
-                Log.d(TAG, Arrays.toString(array_global)+" global");
-                Log.d(TAG, Arrays.toString(array_IN)+" India");
+                array_global = doc_global.getElementsByClass("maincounter-number").text().split(" ");
+                array_IN = doc_IN.getElementsByClass("maincounter-number").text().split(" ");
+                Log.d(TAG, Arrays.toString(array_global) + " global");
+                Log.d(TAG, Arrays.toString(array_IN) + " India");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -197,67 +210,70 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         }
     }
 
-    void Initialize(){
-        navigationView=(NavigationView)findViewById(R.id.navigationView);
-        dashboard=(Button)findViewById(R.id.btn_dash);
-        mToolbar=(Toolbar)findViewById(R.id.nav_action_bar);
+
+    void Initialize() {
+        dashboard = (Button) findViewById(R.id.btn_dash);
+        mToolbar = (Toolbar) findViewById(R.id.nav_action_bar);
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference("message");
+        myRef.setValue("Shivam");
+
         //setActionBar(mToolbar);
 
-        mDrawerLayout=(DrawerLayout)findViewById(R.id.drawerLayout);
-        mToogle=new ActionBarDrawerToggle(this,mDrawerLayout,R.string.open,R.string.close);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        mToogle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
 
         mDrawerLayout.addDrawerListener(mToogle);
         mToogle.syncState();
 
-        fingerprintImage=findViewById(R.id.fingerprintImage);
-        instruction=findViewById(R.id.instruction);
+        fingerprintImage = findViewById(R.id.fingerprintImage);
+        instruction = findViewById(R.id.instruction);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        tv=findViewById(R.id.global);
+        tv = findViewById(R.id.global);
         picker_hr = findViewById(R.id.numberpicker_main_picker_hr);
         picker_hr.setMaxValue(5);
         picker_hr.setMinValue(0);
-        pickerVals_hr  = new String[] {"0", "1", "2", "3", "4","5","6"};
+        pickerVals_hr = new String[]{"0", "1", "2", "3", "4", "5", "6"};
 
         picker_min = findViewById(R.id.numberpicker_main_picker_min);
         picker_min.setMaxValue(59);
         picker_min.setMinValue(0);
-        pickerVals_min  = new String[] {
-                "0","1","2","3","4","5","6","7","8","9","10",
-                "11","12","13","14","15","16","17","18","19","20",
-                "21","22","23","24","25","26","27","28","29","30",
-                "31","32","33","34","35","36","37","38","39","40",
-                "41","42","43","44","45","46","47","48","49","50",
-                "51","52","53","54","55","56","57","58","59"};
+        pickerVals_min = new String[]{
+                "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+                "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
+                "21", "22", "23", "24", "25", "26", "27", "28", "29", "30",
+                "31", "32", "33", "34", "35", "36", "37", "38", "39", "40",
+                "41", "42", "43", "44", "45", "46", "47", "48", "49", "50",
+                "51", "52", "53", "54", "55", "56", "57", "58", "59"};
 
         picker_sec = findViewById(R.id.numberpicker_main_picker_sec);
         picker_sec.setMaxValue(59);
         picker_sec.setMinValue(0);
-        pickerVals_sec  = new String[] {
-                "0","1","2","3","4","5","6","7","8","9","10",
-                "11","12","13","14","15","16","17","18","19","20",
-                "21","22","23","24","25","26","27","28","29","30",
-                "31","32","33","34","35","36","37","38","39","40",
-                "41","42","43","44","45","46","47","48","49","50",
-                "51","52","53","54","55","56","57","58","59"};
+        pickerVals_sec = new String[]{
+                "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+                "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
+                "21", "22", "23", "24", "25", "26", "27", "28", "29", "30",
+                "31", "32", "33", "34", "35", "36", "37", "38", "39", "40",
+                "41", "42", "43", "44", "45", "46", "47", "48", "49", "50",
+                "51", "52", "53", "54", "55", "56", "57", "58", "59"};
 
         picker_hr.setDisplayedValues(pickerVals_hr);
         picker_min.setDisplayedValues(pickerVals_min);
         picker_min.setDisplayedValues(pickerVals_sec);
 
 
-
-
     }
+
     private void startTimer() {
         new CountDownTimer(7200000, 1000) {
 
             public void onTick(long millisUntilFinished) {
 
-                long total_seconds=(millisUntilFinished / 1000);
-                hr=(int)((total_seconds/60)/60);
-                min=(int)((total_seconds/60)-(hr*60));
-                sec=(int)(total_seconds-((hr*60*60-min*60)));
+                long total_seconds = (millisUntilFinished / 1000);
+                hr = (int) ((total_seconds / 60) / 60);
+                min = (int) ((total_seconds / 60) - (hr * 60));
+                sec = (int) (total_seconds - ((hr * 60 * 60 - min * 60)));
 
                 picker_hr.setValue(hr);
                 picker_min.setValue(min);
@@ -265,38 +281,34 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
             }
 
             public void onFinish() {
-               // mTextField.setText("done!");
+                // mTextField.setText("done!");
             }
         }.start();
     }
 
 
     //verify fingerprint
-    private void verifyFingerPrint(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            fingerprintManager= (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
+    private void verifyFingerPrint() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
             keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
-            if (!fingerprintManager.isHardwareDetected()){
+            if (!fingerprintManager.isHardwareDetected()) {
                 instruction.setText("Fingerprint Scanner Not Detected");
-            }
-            else if (ContextCompat.checkSelfPermission(this, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED){
+            } else if (ContextCompat.checkSelfPermission(this, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
                 instruction.setText("Permission not Granted");
-            }
-            else if(!keyguardManager.isKeyguardSecure()){
+            } else if (!keyguardManager.isKeyguardSecure()) {
                 instruction.setText("Add lock to your phone in settings");
-            }
-            else if(!fingerprintManager.hasEnrolledFingerprints()){
+            } else if (!fingerprintManager.hasEnrolledFingerprints()) {
                 instruction.setText("Add at least one fingerprint in your device to use this feature");
-            }
-            else{
+            } else {
                 instruction.setText("Place your Finger on FingerprintScanner");
 
                 generateKey();
 
-                if (cipherInit()){
-                    FingerprintManager.CryptoObject cryptoObject= new FingerprintManager.CryptoObject(cipher);
-                    FingerprintHandler fingerprintHandler=new FingerprintHandler(this);
-                    fingerprintHandler.startAuth(fingerprintManager,cryptoObject);
+                if (cipherInit()) {
+                    FingerprintManager.CryptoObject cryptoObject = new FingerprintManager.CryptoObject(cipher);
+                    FingerprintHandler fingerprintHandler = new FingerprintHandler(this);
+                    fingerprintHandler.startAuth(fingerprintManager, cryptoObject);
                 }
             }
         }
