@@ -160,8 +160,6 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                     SmsManager.getDefault().sendTextMessage(number, null, messageToSend, null,null);
                     Log.d(TAG, "onTick: False");
                 }
-                //Content content = new Content();
-                //content.execute();
             }
 
             public void onFinish() {
