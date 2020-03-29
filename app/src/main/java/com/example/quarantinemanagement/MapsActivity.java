@@ -195,5 +195,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Toast.makeText(getApplicationContext(),"thanks for updating👍",Toast.LENGTH_SHORT).show();
         startActivity(new Intent(MapsActivity.this,MenuListActivity.class));
 
+
     }
 }

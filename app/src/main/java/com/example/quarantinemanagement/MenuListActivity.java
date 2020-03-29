@@ -10,7 +10,7 @@ import android.widget.Button;
 
 public class MenuListActivity extends AppCompatActivity {
 
-    private Button update_location,who_data,DonateBtn,Guidlines;
+    private Button update_location,who_data,DonateBtn,Guidlines,precaution;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +19,7 @@ public class MenuListActivity extends AppCompatActivity {
         who_data=(Button)findViewById(R.id.btn_who);
         DonateBtn=(Button)findViewById(R.id.btn_donate);
         Guidlines=(Button)findViewById(R.id.btn_guidelines);
+        precaution=(Button)findViewById(R.id.precaution_btn);
 
 
         update_location.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +47,12 @@ public class MenuListActivity extends AppCompatActivity {
                 browse("https://www.mygov.in/covid-19/");
             }
         });
+       precaution.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               startActivity(new Intent(MenuListActivity.this,Precaution.class));
+           }
+       });
 
 
     }

@@ -57,7 +57,7 @@ public class Telephone extends AppCompatActivity implements Exampleadapter.onNot
         exampleList.get(position);
         Example_item listitemok = exampleList.get(position);
         String phoneno =listitemok.getmText2();
-        //Toast.makeText(getApplicationContext(),phoneno,Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),phoneno,Toast.LENGTH_LONG).show();
         Uri u = Uri.parse("tel:"+phoneno);
         Intent i = new Intent(Intent.ACTION_DIAL, u);
         startActivity(i);
