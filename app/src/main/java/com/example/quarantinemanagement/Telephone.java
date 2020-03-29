@@ -24,6 +24,8 @@ public class Telephone extends AppCompatActivity implements Exampleadapter.onNot
         setContentView(R.layout.activity_telephone);
 
         exampleList = new ArrayList<>();
+        ArrayList<Example_item> exampleList = new ArrayList<>();
+        exampleList.add(new Example_item(R.drawable.ic_call_black_phone,"Jharkhand","104"));
         exampleList.add(new Example_item(R.drawable.ic_call_black_phone,"Andhra Pradesh","0866-2410978"));
         exampleList.add(new Example_item(R.drawable.ic_call_black_phone,"Arunanchal Pradesh","9436055743"));
         exampleList.add(new Example_item(R.drawable.ic_call_black_phone,"Assam","6913347770"));
@@ -32,7 +34,6 @@ public class Telephone extends AppCompatActivity implements Exampleadapter.onNot
         exampleList.add(new Example_item(R.drawable.ic_call_black_phone,"Goa","104"));
         exampleList.add(new Example_item(R.drawable.ic_call_black_phone,"Gujrat","104"));
         exampleList.add(new Example_item(R.drawable.ic_call_black_phone,"Harayana","8558893911"));
-        exampleList.add(new Example_item(R.drawable.ic_call_black_phone,"Jharkhand","104"));
         exampleList.add(new Example_item(R.drawable.ic_call_black_phone,"Himanchal Pradesh","104"));
         exampleList.add(new Example_item(R.drawable.ic_call_black_phone,"Karnataka","104"));
         exampleList.add(new Example_item(R.drawable.ic_call_black_phone,"Kerala","0471-2552056"));
@@ -49,6 +50,7 @@ public class Telephone extends AppCompatActivity implements Exampleadapter.onNot
     }
     public void helo(View v){
 
+
     }
 
     @Override
@@ -60,5 +62,4 @@ public class Telephone extends AppCompatActivity implements Exampleadapter.onNot
         String phoneno =listitemok.getmText2();                 // phone no for dialing
         Toast.makeText(getApplicationContext(),phoneno,Toast.LENGTH_LONG).show(); // start dialer activity'''''''''
     }
-    /////////////////////////////////helo
 }
