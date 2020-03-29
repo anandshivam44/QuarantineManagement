@@ -11,5 +11,9 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+    <style name="myButtonTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColorPrimary">#abcdef</item>
+        <item name="colorButtonNormal">#abcdef</item>
+    </style>
 
 </resources>

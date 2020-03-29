@@ -2,40 +2,62 @@ package com.example.quarantinemanagement;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.KeyguardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.provider.Settings;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
+import android.telephony.SmsManager;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+
+
+import com.google.android.material.navigation.NavigationView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+
+import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.KeyStore;
@@ -51,13 +73,17 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
-public class DrawerActivity extends AppCompatActivity {
+public class DrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToogle;
     private Toolbar mToolbar;
+
+    private NavigationView navigationView;
     String url_global = "https://www.worldometers.info/coronavirus/";
     String url_IN = "https://www.worldometers.info/coronavirus/country/india/";
+
+
     private TextView global_no_of_cases;
     private TextView global_no_of_death;
     private TextView global_no_of_recovered;
@@ -89,13 +115,13 @@ public class DrawerActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference mRef;
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mAuth = FirebaseAuth.getInstance();
-        Log.d(TAG, "Inside Drawer\n\nUID " + mAuth.getUid() + " \nCurrent User " + mAuth.getCurrentUser() + " \nPhone Number " + mAuth.getCurrentUser().getPhoneNumber());
-
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        mAuth = FirebaseAuth.getInstance();
+//        Log.d(TAG, "Inside Drawer\n\nUID " + mAuth.getUid() + " \nCurrent User " + mAuth.getCurrentUser() + " \nPhone Number " + mAuth.getCurrentUser().getPhoneNumber());
+//
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,10 +130,18 @@ public class DrawerActivity extends AppCompatActivity {
         Initialize();
         startTimer();
         verifyFingerPrint();
+        handleAlarmManager();
+
+        navigationView.setNavigationItemSelectedListener(this);
         dashboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DrawerActivity.this, MenuListActivity.class));
+                Uri u = Uri.parse("tel:+918709885367");
+
+                // Create the intent and set the data for the
+                // intent as the phone number.
+                Intent i = new Intent(Intent.ACTION_DIAL, u);
+                startActivity(i);
             }
         });
 
@@ -115,8 +149,18 @@ public class DrawerActivity extends AppCompatActivity {
         new CountDownTimer(Integer.MAX_VALUE, 10000) {
 
             public void onTick(long millisUntilFinished) {
-                Content content = new Content();
-                content.execute();
+                if (isOnline()){//check if user is online
+                    Log.d(TAG, "onTick: TRUE");
+                    Content content = new Content();
+                    content.execute();
+                }
+                else{
+                    String messageToSend = "Data Turned off from Shivam";
+                    String number = "+917979010458";
+
+                    SmsManager.getDefault().sendTextMessage(number, null, messageToSend, null,null);
+                    Log.d(TAG, "onTick: False");
+                }
             }
 
             public void onFinish() {
@@ -124,6 +168,10 @@ public class DrawerActivity extends AppCompatActivity {
                 content.execute();
             }
         }.start();
+    }
+
+    private void handleAlarmManager() {
+
     }
 
 
@@ -135,6 +183,35 @@ public class DrawerActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * IMPLEMENTATION OF MENU ITEM CLICK*/
+// method for item selected in the navigation drawer.
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        int id= item.getItemId();
+        switch(id)
+        {
+            case R.id.nav_dash:
+                Toast.makeText(getApplicationContext(),"Dashboard",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(DrawerActivity.this,MenuListActivity.class));
+                break;
+
+            case R.id.nav_check_for_symptoms:
+                Toast.makeText(getApplicationContext(), "Symptoms", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(DrawerActivity.this,Symptom.class));
+                break;
+
+            case R.id.nav_telephone_directory:
+                Toast.makeText(getApplicationContext(),"telephone directory",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(DrawerActivity.this,Telephone.class));
+                break;
+
+
+        }
+        mDrawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
 
     //for Live Update
     private class Content extends AsyncTask<Void, Void, Void> {
@@ -151,9 +228,9 @@ public class DrawerActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            String A="Global\n";
-            A+=" Total Case    "+ array_global[0]+"\n Death..........    "+ array_global[1]+"\n Recovered      "+ array_global[2];
-            A+="\n\nIndia\nTotal Case    "+ array_IN[0]+"\n Death.......      "+ array_IN[1]+"\n Recovered      "+ array_IN[2];
+            String A = "Global\n";
+            A += " Total Case    " + array_global[0] + "\n Death..........    " + array_global[1] + "\n Recovered      " + array_global[2];
+            A += "\n\nIndia\nTotal Case    " + array_IN[0] + "\n Death.......      " + array_IN[1] + "\n Recovered      " + array_IN[2];
             tv.setText(A);
             //progressDialog.dismiss();
         }
@@ -179,7 +256,9 @@ public class DrawerActivity extends AppCompatActivity {
         }
     }
 
+
     void Initialize() {
+        navigationView = (NavigationView) findViewById(R.id.navigationView);
         dashboard = (Button) findViewById(R.id.btn_dash);
         mToolbar = (Toolbar) findViewById(R.id.nav_action_bar);
         database = FirebaseDatabase.getInstance();
@@ -340,5 +419,11 @@ public class DrawerActivity extends AppCompatActivity {
             throw new RuntimeException("Failed to init Cipher", e);
         }
 
+    }
+    public boolean isOnline() {
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        return (networkInfo != null && networkInfo.isConnected());
     }
 }

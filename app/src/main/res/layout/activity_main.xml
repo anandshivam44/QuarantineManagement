@@ -1,113 +1,91 @@
-<?xml version="1.0" encoding="utf-8"?>
-<HorizontalScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
-    android:background="@drawable/gradient_background"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context=".MainActivity"
-    android:gravity="center">
+    tools:context="MainActivity"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
+        <ImageView
+            android:id="@+id/give_permission_sms"
+            android:layout_width="0dp"
+            android:layout_margin="20dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/vector_sms"
+            android:background="#abcdef"
+            android:textSize="60sp" >
+        </ImageView>
 
-    <GridLayout
-        android:layout_width="wrap_content"
-        android:text="permission"
-        android:id="@+id/permission"
-        android:background="@drawable/blue_gradient"
-        android:textColor="#FFFFFF"
-        android:layout_margin="5dp"
-        android:textSize="20dp"
-        android:padding="10dp"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:gravity="center"
-        tools:context=".MainActivity"
-        >
-    <Button
+        <ImageView
+            android:id="@+id/give_permission_battery"
+            android:layout_width="0dp"
+            android:layout_margin="20dp"
+            android:src="@drawable/vector_battery"
+            android:background="#abcdef"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="60sp" />
+
+        
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/give_permission_gps"
+            android:layout_width="0dp"
+            android:layout_margin="20dp"
+            android:background="#abcdef"
+            android:layout_height="match_parent"
+            android:src="@drawable/vector_map"
+            android:layout_weight="1"
+            android:textSize="60sp" />
+
+        <ImageView
+            android:id="@+id/give_permission_autostart"
+            android:layout_width="0dp"
+            android:layout_margin="20dp"
+            android:background="#abcdef"
+            android:layout_height="match_parent"
+            android:src="@drawable/vector_high_priority"
+            android:layout_weight="1"
+            android:textSize="60sp" />
+
+        
+
+    </LinearLayout>
+
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="permission"
-        android:id="@+id/permission1"
-        android:background="@drawable/permission_button_background"
-        android:textColor="#FFFFFF"
-        android:layout_margin="5dp"
-        android:textSize="20dp"
-        android:padding="10dp"/>
+        android:layout_weight="0.2">
+
+
 
         <Button
-            android:id="@+id/permission2"
-            android:layout_width="wrap_content"
+            android:id="@+id/next"
+            android:background="@drawable/btn_background"
+            android:layout_width="match_parent"
+            android:paddingHorizontal="40dp"
+            android:layout_marginHorizontal="30dp"
             android:layout_height="wrap_content"
-            android:layout_row="0"
-            android:layout_column="1"
-            android:layout_margin="5dp"
-            android:background="@drawable/permission_button_background"
-            android:padding="10dp"
-            android:text="Main activity"
-            android:textColor="#FFFFFF"
-            android:textSize="20dp" />
+            android:layout_centerInParent="true"
+            android:text="Next"
+            />
 
-        <Button
-            android:id="@+id/permission3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_row="0"
-            android:layout_column="2"
-            android:layout_margin="5dp"
-            android:background="@drawable/permission_button_background"
-            android:padding="10dp"
-            android:text="permission"
-            android:textColor="#FFFFFF"
-            android:textSize="20dp" />
+    </RelativeLayout>
 
-        <Button
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="permission"
-        android:id="@+id/permission4"
-        android:background="@drawable/permission_button_background"
-        android:textColor="#FFFFFF"
-        android:layout_margin="5dp"
-        android:textSize="20dp"
-        android:padding="10dp"/>
-    <Button
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="permission"
-        android:id="@+id/permission5"
-        android:background="@drawable/permission_button_background"
-        android:textColor="#FFFFFF"
-        android:layout_margin="5dp"
-        android:textSize="20dp"
-        android:padding="10dp"/>
-        <Button
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="permission"
-            android:id="@+id/permission6"
-            android:background="@drawable/permission_button_background"
-            android:textColor="#FFFFFF"
-            android:layout_margin="5dp"
-            android:textSize="20dp"
-            android:padding="10dp"/>
-
-    <Button
-        android:id="@+id/permission_to_otp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Next"
-        android:background="@drawable/btn_background"
-        android:padding="15dp"
-        />
-
-
-
-    </GridLayout>
-
-
-</HorizontalScrollView>
+</LinearLayout>

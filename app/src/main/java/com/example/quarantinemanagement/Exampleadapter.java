@@ -1,5 +1,6 @@
 package com.example.quarantinemanagement;
 
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,9 +54,9 @@ public class Exampleadapter extends RecyclerView.Adapter<Exampleadapter.ExampleV
     @NonNull
     @Override
     public ExampleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-       View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.example_item,parent,false);
-       ExampleViewHolder evh = new ExampleViewHolder(v , monNoteListener);
-       return evh;
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.example_item,parent,false);
+        ExampleViewHolder evh = new ExampleViewHolder(v , monNoteListener);
+        return evh;
     }
 
     @Override

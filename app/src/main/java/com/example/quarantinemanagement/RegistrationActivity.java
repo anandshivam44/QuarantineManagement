@@ -1,8 +1,15 @@
 package com.example.quarantinemanagement;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,6 +20,9 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -23,6 +33,8 @@ import java.util.Map;
 
 public class RegistrationActivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
+
+
     String[] stateNames = {"Jharkhand", "Andhra Pradesh", "Arunachal Pradesh", "Assam",
             "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh"
             , "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur",
@@ -73,6 +85,10 @@ public class RegistrationActivity extends AppCompatActivity implements
         //Setting the ArrayAdapter data on the Spinner
         spin.setAdapter(aa);
 
+
+// comment added
+
+
         REGISTER.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,14 +108,21 @@ public class RegistrationActivity extends AppCompatActivity implements
                 mUser.put("Emergency Contact No",emergencyNumber);
                 myRef.child("user1").setValue(mUser);
 
+                //for location update
+                Intent intent=new Intent(RegistrationActivity.this,MapsActivity.class);
+                intent.putExtra("username",fullName);
+                startActivity(intent);
+
+
             }
         });
+
 
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(getApplicationContext(), stateNames[position], Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), stateNames[position], Toast.LENGTH_SHORT).show();
         state= stateNames[position];
     }
 
@@ -123,4 +146,6 @@ public class RegistrationActivity extends AppCompatActivity implements
                     break;
         }
     }
+
+
 }

@@ -1,9 +1,10 @@
 package com.example.quarantinemanagement;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -53,11 +54,12 @@ public class Telephone extends AppCompatActivity implements Exampleadapter.onNot
 
     @Override
     public void onNoteListenre(int position) {
-
         exampleList.get(position);
         Example_item listitemok = exampleList.get(position);
-        String phoneno =listitemok.getmText2();                 // phone no for dialing
-        Toast.makeText(getApplicationContext(),phoneno,Toast.LENGTH_LONG).show(); // start dialer activity'''''''''
+        String phoneno =listitemok.getmText2();
+        Toast.makeText(getApplicationContext(),phoneno,Toast.LENGTH_LONG).show();
+        Uri u = Uri.parse("tel:"+phoneno);
+        Intent i = new Intent(Intent.ACTION_DIAL, u);
+        startActivity(i);
     }
-    /////////////////////////////////helo
 }

@@ -2,8 +2,7 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/nav_account"
+    <item android:id="@+id/nav_dash"
         android:title="Dashboard"
         />
     <item
@@ -14,7 +13,4 @@
     <item
         android:id="@+id/nav_telephone_directory"
         android:title="Telephone Directory" />
-    <item
-        android:id="@+id/nav_know_infeted"
-        android:title="Know if you crossed an infected patient" />
 </menu>
