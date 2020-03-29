@@ -22,7 +22,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Symptom"></activity>
+        <activity android:name=".Precaution"></activity>
+        <activity android:name=".Symptom" />
         <activity android:name=".Telephone">
 
             <!-- <intent-filter> -->
