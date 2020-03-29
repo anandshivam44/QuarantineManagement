@@ -10,7 +10,6 @@ import android.view.View;
 import java.util.ArrayList;
 
 public class Telephone extends AppCompatActivity {
-    //////////////////////////////////
 
     private RecyclerView mRecyclerview;
     private RecyclerView.Adapter madapter;
